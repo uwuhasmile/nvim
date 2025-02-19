@@ -9,7 +9,6 @@ vim.opt.showmode = false
 vim.opt.showcmd = true
 
 -- Color scheme
-vim.cmd([[syntax on]])
 vim.opt.termguicolors = true
 vim.opt.background = black
 

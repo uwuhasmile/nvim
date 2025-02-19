@@ -18,6 +18,6 @@ require("lazy").setup({
   spec = {
     { import = "uwuhasmile.plugins" },
   },
-  install = { colorscheme = { "github_dark_default" } },
+  install = { colorscheme = { "gruvbox" } },
   checker = { enabled = true },
 })
