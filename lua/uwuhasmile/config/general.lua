@@ -16,6 +16,7 @@ vim.opt.background = black
 -- Netrw
 vim.g.netrw_banner = false
 vim.g.netrw_liststyle = 4
+vim.g.netrw_list_hide = "*.obj,*.exe,.git,.idea,.vs,.vscode,^\\.\\=/\\=$"
 vim.g.netrw_hide = 1
 
 -- Behaviour
