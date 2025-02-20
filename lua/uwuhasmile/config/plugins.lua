@@ -15,7 +15,7 @@ treesitter_config.setup({
 })
 
 -- Cmp
------
+------
 local cmp = require("cmp")
 require("luasnip.loaders.from_vscode").lazy_load()
 cmp.setup({
@@ -79,3 +79,49 @@ lspconfig_configs.neocmake = {
 lspconfig.neocmake.setup({ capabilities = capabilities, })
 lspconfig.clangd.setup({ filetypes = { "c", "cpp", "h", "hpp", }, capabilities = capabilities, })
 lspconfig.pyright.setup({ capabilities = capabilities, })
+
+-- DAP
+------
+local dap = require("dap")
+local dap_virtualtext = require("nvim-dap-virtual-text")
+local dap_widgets = require("dap.ui.widgets")
+-- Adapters
+dap.adapters.lldb = {
+    type = "executable",
+    command = "/usr/bin/lldb-dap",
+    name = "lldb",
+}
+-- Virtual text
+dap_virtualtext.setup({
+    enabled = true,
+    enabled_commands = false,
+    highlight_changed_variables = true,
+    highlight_new_as_changed = true,
+    show_stop_reason = true,
+    commented = true,
+    only_first_definition = true,
+    all_references = false,
+    clear_on_continue = false,
+    display_callback = function(variable, options)
+        if options.virt_text_pos == "inline" then
+            return ' = ' .. variable.value:gsub("%s+", " ")
+        else
+            return variable.name .. ' = ' .. variable.value:gsub("%s+", " ")
+        end
+    end,
+    virt_text_pos = "inline",
+})
+-- Keymap
+vim.keymap.set('n', "<leader>dj", function()
+    if vim.fn.filereadable(".vscode/launch.json") then require("dap.ext.vscode").load_launchjs() end
+    dap.continue()
+end)
+vim.keymap.set('n', "<leader>dso", dap.step_over)
+vim.keymap.set('n', "<leader>dsi", dap.step_into)
+vim.keymap.set('n', "<leader>dsf", dap.step_out)
+vim.keymap.set('n', "<leader>db", dap.toggle_breakpoint)
+vim.keymap.set('n', "<leader>db", dap.toggle_breakpoint)
+vim.keymap.set('n', "<leader>dh", dap_widgets.hover)
+vim.keymap.set('n', "<leader>dp", dap_widgets.preview)
+vim.keymap.set('n', "<leader>df", function() dap_widgets.centered_float(dap_widgets.frames) end)
+vim.keymap.set('n', "<leader>ds", function() dap_widgets.centered_float(dap_widgets.scopes) end)
