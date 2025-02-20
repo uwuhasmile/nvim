@@ -10,7 +10,6 @@ vim.opt.showcmd = true
 
 -- Color scheme
 vim.opt.termguicolors = true
-vim.opt.background = black
 
 -- Netrw
 vim.g.netrw_banner = false
