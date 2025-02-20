@@ -14,6 +14,13 @@ treesitter_config.setup({
     indent = { enable = true },
 })
 
+-- FZF
+------
+local fzf = require("fzf-lua")
+fzf.setup({ "hide", })
+vim.keymap.set('n', "<leader>ff", function() fzf.files({ resume = true, }) end)
+vim.keymap.set('n', "<leader>fb", function() fzf.buffers({ resume = true, }) end)
+
 -- Cmp
 ------
 local cmp = require("cmp")
