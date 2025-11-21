@@ -31,10 +31,10 @@ return {
     vim.keymap.set('n', '<F4>', dap.step_out)
     vim.keymap.set('n', '<F5>', dap.step_back)
 
-    dap.adapters.lldb = {
+    dap.adapters['lldb-dap'] = {
       type = 'executable',
       command = 'lldb-dap',
-      name = 'lldb'
+      name = 'lldb-dap'
     }
   end
 }
