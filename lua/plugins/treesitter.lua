@@ -1,12 +1,9 @@
 return {
   'nvim-treesitter/nvim-treesitter',
+  lazy = false,
   build = ':TSUpdate',
   config = function()
-    local config = require('nvim-treesitter.configs')
-    config.setup({
-      ensure_installed = { 'lua', 'c', 'cpp', 'cmake', 'glsl', 'hlsl', 'json', 'json5', 'make' },
-      highlight = { enable = true },
-      indent = { enable = true },
-    })
+    local ts = require('nvim-treesitter') 
+    ts.install({ 'lua', 'c', 'cpp', 'cmake', 'make', 'ninja' })
   end
 }
